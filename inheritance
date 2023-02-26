@@ -1,0 +1,169 @@
+public abstract class Person
+{   
+    public string FirstName { get; set; } 
+    public string LastName { get; set; }
+    public string StreetAddress { get; set; }
+    public string City { get; set; }
+    public string Telephone { get; set; }
+
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
+ //in C# every object has a function ToString() as we r defining it again we call this override 
+
+public abstract class Student : Person
+{
+    public double Test1 { get; set; }
+    public double Test2 { get; set; }
+
+    public virtual double ComputeGrade()
+    {
+        return 0.0;
+    }
+      public override string ToString()
+    {
+        return $" Student Name: {FirstName} {LastName}, Address: {StreetAddress}, {City}, Telephone: {Telephone}";
+    }
+}
+
+public class PartTimeStudent : Student
+{
+    public string SSNum { get; set; }
+
+    public override double ComputeGrade()
+    {
+        return 0.4 * Test1 + 0.6 * Test2;
+    }
+     public override string ToString()
+    {
+        return base.ToString() + $" Part time Student , SSN: {SSNum}, Test1: {Test1}, Test2: {Test2}, Grade: {ComputeGrade()}";
+    }
+}
+
+public class UnderGradStudent : Student
+{
+    public string ID { get; set; }
+
+    public override double ComputeGrade()
+    {
+        return 0.45 * Test1 + 0.55 * Test2;
+    }
+     public override string ToString()
+    {
+        return base.ToString() + $" Under grad student , ID: {ID}, Test1: {Test1}, Test2: {Test2}, Grade: {ComputeGrade()}";
+    }
+}
+
+public class GradStudent : Student
+{
+    public string ID { get; set; }
+    public string Thesis { get; set; }
+
+    public override double ComputeGrade()
+    {
+        return 0.45 * Test1 + 0.55 * Test2;
+    }
+     public override string ToString()
+    {
+        return base.ToString() + $"Gradstudent , ID: {ID}, Test1: {Test1}, Test2: {Test2}, Thesis: {Thesis}, Grade: {ComputeGrade()}";
+    }
+}
+
+public class PhDStudent : Student
+{
+    public string ID { get; set; }
+    public string PhdAdvisor { get; set; }
+
+    public override double ComputeGrade()
+    {
+        return 0.3 * Test1 + 0.7 * Test2;
+    }
+     public override string ToString()
+    {
+        return base.ToString() + $" PhDStudent, ID: {ID}, Test1: {Test1}, Test2: {Test2}, PhdAdvisor: {PhdAdvisor}, Grade: {ComputeGrade()}";
+    }
+}
+
+public abstract class Employee : Person
+{
+    public string EmpID { get; set; }
+    public string Department { get; set; }
+    public override string ToString()
+    {
+        return $"Employee: {FirstName} {LastName}, {Department}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
+
+public class LabManager : Employee
+{
+	 public override string ToString()
+    {
+        return $"Lab Manager: {FirstName} {LastName}, {Department}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
+
+public class FullTimeFaculty : Employee
+{
+    public string Rank { get; set; }
+
+    public FullTimeFaculty(string firstName, string lastName, string empId, string department, string rank, string streetAddress, string city, string telephone)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        EmpID = empId;
+        Department = department;
+        Rank = rank;
+        StreetAddress = streetAddress;
+        City = city;
+        Telephone = telephone;
+    }
+
+    public override string ToString()
+    {
+        return $"Full-Time Faculty: {FirstName} {LastName}, {Rank}, {Department}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
+
+public class PartTimeFaculty : Person
+{
+    public string Department { get; set; }
+
+    public PartTimeFaculty(string firstName, string lastName, string ssNum, string department, string streetAddress, string city, string telephone)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        SSNum = ssNum;
+        Department = department;
+        StreetAddress = streetAddress;
+        City = city;
+        Telephone = telephone;
+    }
+
+    public override string ToString()
+    {
+        return $"Part-Time Faculty: {FirstName} {LastName}, {Department}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
+
+public class Secretary : Employee
+{
+    public string Department { get; set; }
+
+    public Secretary(string firstName, string lastName, string empId, string department, string streetAddress, string city, string telephone)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        EmpID = empId;
+        Department = department;
+        StreetAddress = streetAddress;
+        City = city;
+        Telephone = telephone;
+    }
+
+    public override string ToString()
+    {
+        return $"Secretary: {FirstName} {LastName}, {Department}, {StreetAddress}, {City}, {Telephone}";
+    }
+}
